@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: solar-hub
+
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:solarhub}
+    username: ${DB_USER:solarhub}
+    password: ${DB_PASSWORD:solarhub}
+
+  jpa:
+    hibernate:
+      # The schema belongs to Flyway, not Hibernate.
+      # "validate" makes the app fail on startup if an entity doesn't match the database.
+      ddl-auto: validate
+    open-in-view: false
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: 8080
