@@ -1,9 +1,10 @@
 package com.fgsilva.solarhub.user;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Locale;
 
@@ -30,5 +31,12 @@ public class UserService {
         user.setRole(Role.CUSTOMER);
 
         return UserResponse.from(userRepository.save(user));
+    }
+
+    @Transactional(readOnly = true)
+    public UserResponse getByEmail(String email) {
+        return userRepository.findByEmail(email)
+            .map(UserResponse::from)
+            .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
     }
 }
