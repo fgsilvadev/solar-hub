@@ -77,18 +77,19 @@ Os valores padrão servem apenas para desenvolvimento local. Em qualquer outro a
 ```bash
 curl -X POST http://localhost:8080/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{ "name": "Maria Silva", "email": "maria@example.com", "password": "changeme123" }'
+  -d '{ "name": "Nome Sobrenome", "email": "nome@exemplo.com", "password": "altereme1234" }' \
+  -w "\n"
 ```
 
 Exemplo de resposta:
 
 ```json
 {
-  "id": 1,
-  "name": "Maria Silva",
-  "email": "maria@example.com",
-  "role": "CUSTOMER",
-  "createdAt": "2026-11-07T14:30:00Z"
+   "id":2,
+   "name":"Nome Sobrenome",
+   "email":"nome@exemplo.com",
+   "role":"CUSTOMER",
+   "createdAt":"2026-11-07T18:34:19.976243643Z"
 }
 ```
 
@@ -97,7 +98,8 @@ Exemplo de resposta:
 ```bash
 curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{ "email": "maria@example.com", "password": "changeme123" }'
+  -d '{ "email": "nome@exemplo.com", "password": "altereme1234" }' \
+  -w "\n"
 ```
 
 Exemplo de resposta:
@@ -115,7 +117,20 @@ Use o `accessToken` retornado no login:
 
 ```bash
 curl http://localhost:8080/api/users/me \
-  -H "Authorization: Bearer SEU_ACCESS_TOKEN"
+  -H "Authorization: Bearer SEU_ACCESS_TOKEN" \
+  -w "\n"
+```
+
+Exemplo de resposta:
+
+```json
+{
+   "id":2,
+   "name":"Nome Sobrenome",
+   "email":"nome@exemplo.com",
+   "role":"CUSTOMER",
+   "createdAt":"2026-11-07T18:34:19.976244Z"
+}
 ```
 
 ## Roadmap
