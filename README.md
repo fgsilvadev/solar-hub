@@ -121,7 +121,7 @@ curl http://localhost:8080/api/users/me \
   -w "\n"
 ```
 
-Exemplo de resposta:
+Example response:
 
 ```json
 {
